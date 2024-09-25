@@ -141,6 +141,7 @@ INSERT INTO feature_rule (feature, grace_action, name, post_grace_action, rule_o
 
 INSERT INTO feature_rule (feature, grace_action, name, post_grace_action, rule_order, user_type, failed_rule_action_grace, failed_rule_action_post_grace, output) VALUES ('CustomCheckImei', 'Skip', 'CUSTOM_GDCE', 'Skip', 8, 'default', 'Record', 'Record', 'No');
 
+insert ignore into cfg_feature_alert(alert_id,description,feature) values ('alert1110','Something went wrong. Exception <e> occurred for process <process_name> ','CustomCheckImei');
 
 INSERT INTO rule (name, output, state) VALUES ('EXIST_IN_BLACKLIST_DB', 'No', 'Enabled');
 INSERT INTO rule (name, output, state) VALUES ('NATIONAL_WHITELISTS', 'No', 'Enabled');
