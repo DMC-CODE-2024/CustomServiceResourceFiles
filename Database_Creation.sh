@@ -160,5 +160,7 @@ INSERT INTO sys_param (tag, value, feature_name, active) VALUES ('CustomCheckIme
 INSERT INTO sys_param (tag, value, feature_name, active) VALUES ('CamDxLayerHeaderName', 'X-Road-Client', 'CustomCheckImei', 1);
 INSERT INTO sys_param (tag, value, feature_name, active) VALUES ('CamDxLayerHeaderValue', 'CAMBODIA/GOV/CAMDX-20201222/GDCE_EIRS_TEST', 'CustomCheckImei', 1);
 
+insert into sys_param(tag , value)values ( 'gdce_register_imei_update_last_run_time' , '2020-01-01');
+insert into cfg_feature_alert( alert_id,description,feature )values ('alert1607','Exception <e> occurred for <process_name>.' , 'RegisterCustomImeiUpdate');
 
 EOFMYSQL
