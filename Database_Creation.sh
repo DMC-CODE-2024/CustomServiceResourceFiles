@@ -163,6 +163,6 @@ INSERT INTO sys_param (tag, value, feature_name, active) VALUES ('CamDxLayerHead
 insert into sys_param(tag , value)values ( 'gdce_register_imei_update_last_run_time' , '2020-01-01');
 insert into cfg_feature_alert( alert_id,description,feature )values ('alert1607','Exception <e> occurred for <process_name>.' , 'RegisterCustomImeiUpdate');
 
-alter table gdce_data add column sim int default 0, add column brand varchar(50) default '', add column model varchar(50) default '', add column device_type varchar(50) default '', add column goods_description varchar(50) default '', drop column transaction_id  , modify column serial_number varchar(50) default '';
+alter table gdce_data add column sim int default 0, add column brand varchar(255) default '', add column model varchar(255) default '', add column device_type varchar(50) default '', add column goods_description varchar(255) default '', drop column transaction_id  , modify column serial_number varchar(50) default '';
 
 EOFMYSQL
