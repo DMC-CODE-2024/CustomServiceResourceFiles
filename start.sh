@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-module_name="custom_service"
+module_name="api_customs_duty"
 main_module="api_service"       # keep it empty "" if there is no main module 
 log_level="INFO"                # INFO, DEBUG, ERROR
 rule_engine="${APP_HOME}/utility/rule_engine/rule_engine.jar"
