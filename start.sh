@@ -1,38 +1,56 @@
+
 #!/bin/bash
 
 module_name="custom_service"
-main_module="" 		## keep it empty "" if there is no main module 
-log_level="INFO" 	## INFO, DEBUG, ERROR
+main_module="api_service"       # keep it empty "" if there is no main module 
+log_level="INFO"                # INFO, DEBUG, ERROR
 rule_engine="${APP_HOME}/rule_engine/RuleEngine-1.1.jar"
+
 ########### DO NOT CHANGE ANY CODE OR TEXT AFTER THIS LINE #########
 
 . ~/.bash_profile
 
 build="${module_name}.jar"
 
-status=`ps -ef | grep $build | grep java`
+pid=`ps -ef | grep $build | grep java | grep $module_name | grep -v grep | awk '{print $2}'`
 
-if [ "${status}" != "" ]  ## Process is currently running
+if [ "${pid}" != "" ]  ## Process is currently running
 then
-  echo "${module_name} already started..."
+  echo "${module_name} process is currently running with PID ${pid} ..."
 
 else  ## No process running
- 
+
   if [ "${main_module}" == "" ]
   then
      build_path="${APP_HOME}/${module_name}_module"
      log_path="${LOG_HOME}/${module_name}_module"
   else
-     build_path="${APP_HOME}/${main_module}_module/${module_name}"
-     log_path="${LOG_HOME}/${main_module}_module/${module_name}"
+     if [ "${main_module}" == "utility" ] || [ "${main_module}" == "api_service" ] || [ "${main_module}" == "gui" ]
+     then
+       build_path="${APP_HOME}/${main_module}/${module_name}"
+       log_path="${LOG_HOME}/${main_module}/${module_name}"
+     else
+       build_path="${APP_HOME}/${main_module}_module/${module_name}"
+       log_path="${LOG_HOME}/${main_module}_module/${module_name}"
+     fi
   fi
 
-  mkdir -p $log_path 
   cd ${build_path}
 
-  ## Starting the process
+  mkdir -p  ${log_path}
   echo "Starting ${module_name} module..."
- 
-  java -Dlog4j.configurationFile=./log4j2.xml  -Dlog_level=${log_level} -Dlog_path=${log_path} -Dmodule_name=${module_name} -Dspring.config.location=file:./application.properties,file:${commonConfigurationFilePath}  -Dloader.path=${rule_engine} -cp $build org.springframework.boot.loader.PropertiesLauncher 1>/dev/null 2>${log_path}/${module_name}.error &
 
+#java -Dlog4j.configurationFile=file:./log4j2.xml -Dlog.level=${log_level} -Dlog.path=${log_path} -Dmodule.name=${module_name} -Dspring.config.location=file:./application.properties,file:${commonConfigurationFile} -jar ${build} 1>/dev/null 2>${log_path}/${module_name}.error & 
+ java -Dlog4j.configurationFile=./log4j2.xml  -Dlog.level=${log_level} -Dlog.path=${log_path} -Dmodule.name=${module_name} -Dspring.config.location=file:./application.properties,file:${commonConfigurationFile}  -Dloader.path=${rule_engine} -cp $build org.springframework.boot.loader.PropertiesLauncher 1>/dev/null 2>${log_path}/${module_name}.error &
+
+  pid=`ps -ef | grep $build | grep java | grep $module_name | grep -v grep | awk '{print $2}'`
+  if [ "$pid" == "" ]
+  then
+    echo "Failed to start $module_name process !!!"
+  else
+    echo "$module_name process is started successfully with PID ${pid} ..."
+  fi
 fi
+
+ 
+#  java -Dlog4j.configurationFile=./log4j2.xml  -Dlog_level=${log_level} -Dlog_path=${log_path} -Dmodule_name=${module_name} -Dspring.config.location=file:./application.properties,file:${commonConfigurationFilePath}  -Dloader.path=${rule_engine} -cp $build org.springframework.boot.loader.PropertiesLauncher 1>/dev/null 2>${log_path}/${module_name}.error &
