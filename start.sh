@@ -4,7 +4,7 @@
 module_name="custom_service"
 main_module="api_service"       # keep it empty "" if there is no main module 
 log_level="INFO"                # INFO, DEBUG, ERROR
-rule_engine="${APP_HOME}/rule_engine/RuleEngine-1.1.jar"
+rule_engine="${APP_HOME}/utility/rule_engine/rule_engine.jar"
 
 ########### DO NOT CHANGE ANY CODE OR TEXT AFTER THIS LINE #########
 
