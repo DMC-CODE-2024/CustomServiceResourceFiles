@@ -126,7 +126,7 @@ INSERT IGNORE INTO rule (name, output, state) VALUES ('CUSTOM_GDCE', 'No', 'Enab
 INSERT IGNORE INTO rule (name, output, state) VALUES ('LOCAL_MANUFACTURER', 'No', 'Enabled');
 INSERT IGNORE INTO rule (name, output, state) VALUES ('GSMA_TYPE_APPROVED', 'No', 'Enabled');
 INSERT IGNORE INTO rule (name, output, state) VALUES ('INVALID_IMEI', 'No', 'Enabled');
-INSERT IGNORE INTO rule (name, output, state) VALUES ('CUSTOM_GDCE', 'No', 'Enabled');
+
 INSERT IGNORE INTO rule (name, output, state) VALUES ('GREYLIST_BY_LOST_STOLEN', 'No', 'Enabled');
 
 INSERT IGNORE INTO sys_param (tag, value, feature_name ,type,active,remark,user_type,modified_by  ) VALUES ('CustomAuthApiUrlPath', 'https://stage-gateway.customs.gov.kh/dmc-interface/api/v1/oauth/token', 'CustomCheckImei',0,1,'','','' );
